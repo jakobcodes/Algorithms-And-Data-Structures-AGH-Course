@@ -1,6 +1,3 @@
-from typing import Mapping
-
-
 class BSTNode:
     def __init__(self, key) -> None:
         self.key = key
