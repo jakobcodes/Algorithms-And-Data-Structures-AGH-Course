@@ -59,10 +59,11 @@ def insert(root, key):
     if root == None:
         root = BSTNode(key)
         return True
-    
+
+    # zakladam raczej ze root bedzie dobrze podany
     prev = None
     p = root
-    lewo = None
+    left = None # True - p jest lewym dzieckiem prev, False - p jest prawym dzieckiem prev
     while p != None:
         if key == p.key:
             print("element juz istnieje")
@@ -70,13 +71,13 @@ def insert(root, key):
         elif key < p.key:
             prev = p
             p = p.left
-            lewo = True
+            left = True
         else:
             prev = p
             p = p.right
-            lewo = False
+            left = False
     
-    if lewo:
+    if left:
         prev.left = BSTNode(key)
         prev.left.parent = prev
         return True
@@ -86,6 +87,14 @@ def insert(root, key):
         return True
 
 def remove(root, key):
+    # krotka implementacja znalezienia poprzednika, nie jest potrzebna mi pelna implementacja poniewaz zawsze mam lewe dziecko
+    def find_prev(p):
+        p = p.left
+        while p.right != None:
+            p = p.right
+        
+        return p
+
     if root == None:
         print("BST is empty")
         return False
@@ -102,6 +111,7 @@ def remove(root, key):
     prev = None
     p = root
     left = None
+    # finding element loop
     while p != None:
         if p.key == key:
             # element found
@@ -113,8 +123,8 @@ def remove(root, key):
                     prev.right = None
                 return True
 
-            elif p.left == None or p.right == None: # one children (left or right)
-                if left: 
+            elif p.left == None or p.right == None: # one children exists (left or right)
+                if left: # left children exist
                     if p.left != None:
                         prev.left = p.left
                         p.left = None
@@ -122,7 +132,7 @@ def remove(root, key):
                         prev.left = p.right
                         p.right = None
                     
-                else:
+                else: # right children exist
                     if p.left != None:
                         prev.right = p.left
                         p.left = None
@@ -152,13 +162,7 @@ def remove(root, key):
     
     print("element not found")
     return False
-            
-def find_prev(p):
-    p = p.left
-    while p.right != None:
-        p = p.right
-    
-    return p
+
 
 if __name__ == '__main__':
     root = BSTNode(20)
@@ -172,7 +176,5 @@ if __name__ == '__main__':
     print(insert(root,35))
     print(insert(root,40))
     print(insert(root,13))
-    print_tree(root)
-    print(remove(root,20))
     print_tree(root)
     
