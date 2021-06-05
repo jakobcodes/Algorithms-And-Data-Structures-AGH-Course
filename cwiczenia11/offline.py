@@ -86,7 +86,79 @@ def insert(root, key):
         return True
 
 def remove(root, key):
-    pass
+    if root == None:
+        print("BST is empty")
+        return False
+
+    # delete root
+    if root.key == key:
+        tmp = find_prev(root)
+        remove(root,tmp.key)
+        root.key = tmp.key
+        return True
+
+        
+
+    prev = None
+    p = root
+    left = None
+    while p != None:
+        if p.key == key:
+            # element found
+            if p.left == None and p.right == None: # no childrens
+                p.parent = None
+                if left:
+                    prev.left = None
+                else:
+                    prev.right = None
+                return True
+
+            elif p.left == None or p.right == None: # one children (left or right)
+                if left: 
+                    if p.left != None:
+                        prev.left = p.left
+                        p.left = None
+                    else:
+                        prev.left = p.right
+                        p.right = None
+                    
+                else:
+                    if p.left != None:
+                        prev.right = p.left
+                        p.left = None
+                    else:
+                        prev.right = p.right
+                        p.right = None
+
+                p.parent = None
+                return True
+            else: # both childrens exist
+                tmp = find_prev(p)
+                remove(root,tmp.key)
+                p.key = tmp.key
+                return True
+                
+        elif key < p.key:
+            # go left
+            prev = p
+            p = p.left
+            left = True
+
+        else:
+            # go right
+            prev = p
+            p = p.right
+            left = False
+    
+    print("element not found")
+    return False
+            
+def find_prev(p):
+    p = p.left
+    while p.right != None:
+        p = p.right
+    
+    return p
 
 if __name__ == '__main__':
     root = BSTNode(20)
@@ -100,5 +172,7 @@ if __name__ == '__main__':
     print(insert(root,35))
     print(insert(root,40))
     print(insert(root,13))
+    print_tree(root)
+    print(remove(root,20))
     print_tree(root)
     
