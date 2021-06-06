@@ -95,12 +95,16 @@ def remove(root, key):
         
         return p
 
-    if root == None:
+    if root == None or root.key == None:
         print("BST is empty")
         return False
 
     # delete root
     if root.key == key:
+        if root.left == None and root.right == None: # BST tree with only root node
+            root.key = None
+            return True
+
         tmp = find_prev(root)
         remove(root,tmp.key)
         root.key = tmp.key
@@ -111,7 +115,7 @@ def remove(root, key):
     prev = None
     p = root
     left = None
-    # finding element loop
+    # finding element to delete loop
     while p != None:
         if p.key == key:
             # element found
@@ -177,4 +181,21 @@ if __name__ == '__main__':
     print(insert(root,40))
     print(insert(root,13))
     print_tree(root)
+    print(remove(root,10))
+    print(remove(root,5))
+    print(remove(root,15))
+    print(remove(root,27))
+    print(remove(root,22))
+    print(remove(root,30))
+    print(remove(root,28))
+    print(remove(root,35))
+    print_tree(root)
+    print(remove(root,40))
+    print_tree(root)
+    print(remove(root,13))
+    print_tree(root)
+    print(remove(root,20))
+    print_tree(root)
+    print(remove(root,20))
+
     
