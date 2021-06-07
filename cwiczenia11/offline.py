@@ -105,7 +105,12 @@ def remove(root, key):
             root.key = None
             return True
 
-        tmp = find_prev(root)
+        
+        if find_prev(root) != None:
+            tmp = find_prev(root) # jesli nie istnieje
+        # else:
+        #     tmp = find_next(root)
+
         remove(root,tmp.key)
         root.key = tmp.key
         return True
@@ -172,14 +177,16 @@ if __name__ == '__main__':
     root = BSTNode(20)
     print(insert(root,10))
     print(insert(root,5))
-    print(insert(root,15))
-    print(insert(root,27))
-    print(insert(root,22))
-    print(insert(root,30))
-    print(insert(root,28))
-    print(insert(root,35))
-    print(insert(root,40))
-    print(insert(root,13))
+    # print(insert(root,15))
+    # print(insert(root,27))
+    # print(insert(root,22))
+    # print(insert(root,30))
+    # print(insert(root,28))
+    # print(insert(root,35))
+    # print(insert(root,40))
+    # print(insert(root,13))
+    print_tree(root)
+    print(remove(root,20))
     print_tree(root)
 
     
