@@ -172,21 +172,38 @@ def remove(root, key):
     print("element not found")
     return False
 
+# def find_idx(root,idx):
+
+#     if idx <= root.left.value:
+#         root = root.left
+#         if root.value == idx:
+#             while root.right != None:
+#                 root = root.right
+#             return root
+
+#     else:
+#         idx -= root.left.value
+#         if idx > 1:
+#             root = root.right
+#             idx -= 1
+#         else:
+#             return root
 
 if __name__ == '__main__':
     root = BSTNode(20)
     print(insert(root,10))
     print(insert(root,5))
-    # print(insert(root,15))
-    # print(insert(root,27))
-    # print(insert(root,22))
-    # print(insert(root,30))
-    # print(insert(root,28))
-    # print(insert(root,35))
-    # print(insert(root,40))
-    # print(insert(root,13))
-    print_tree(root)
-    print(remove(root,20))
+    print(insert(root,15))
+    print(insert(root,27))
+    print(insert(root,22))
+    print(insert(root,30))
+    print(insert(root,28))
+    print(insert(root,35))
+    print(insert(root,40))
+    print(insert(root,13))
+    print(insert(root,21))
+    print(insert(root,23))
+    print(insert(root,34))
     print_tree(root)
 
     
